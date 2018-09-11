@@ -1,2 +1,2 @@
-# entro.py
-A small script to do different entropy analysis and randomness checks.
+# Entro.py
+A small script and function library for conducting different entropy analyses and randomness checks.
