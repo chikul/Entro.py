@@ -42,4 +42,27 @@ class report:
                     file_out.write("%s;%d;%f;%f;%f;%f\r" % (file_name, file_size, entropy, new_pi, pi_deviation, chi_squared))
 
             self.console_out("%30s %15d %15f %15f %15f %15f" % (file_name, file_size, entropy, new_pi, pi_deviation, chi_squared))
-        
+    
+    def write_entropy_graph(self, in_file_name, out_file_name, step, start=0, end=0):
+        """
+        Calculates entropy oscillations for a file and write it to CSV spreadsheet.
+        """
+        byte_array = []
+        with open(in_file_name, "rb") as f:
+            byte_array = f.read()
+
+        if start != 0 or end != 0:
+            byte_array = byte_array[start:end]
+
+        entropies = compute_entropy_graph(byte_array, step)
+        self.console_out("Entropy (per %d bytes)" % step)
+
+        if out_file_name != "":
+            with open(out_file_name, "w") as file_out:
+                file_out.write("Entropy (per %d bytes)\r" % step)
+                for i in range(len(entropies)):
+                    self.console_out(entropies[i])
+                    file_out.write("%f\r" % entropies[i])
+        else:
+            for i in range(len(entropies)):
+                self.console_out(entropies[i])
