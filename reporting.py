@@ -17,7 +17,7 @@ class report:
 
     def process_directory(self, in_path, out_file_name):
         """
-        Creates an entropy report for a list of filesin directory and saves it in a CSV spreadsheet.
+        Creates an entropy report for a list of files in directory and saves it in a CSV spreadsheet.
         """
         (_, _, file_list) = next(walk(in_path), (None, None, []))
         if out_file_name != "":
