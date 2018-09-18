@@ -35,7 +35,7 @@ def compute_entropy_graph(data, step):
 
     while current_position < len(data):
         new_entropy = compute_entropy(data[current_position:current_position + step])
-        entropies.append((new_entropy, 8 if new_entropy > 7.3 else 0))
+        entropies.append(new_entropy)
         current_position += step # Note: We skip the last chunk if it's less than step.
 
     return entropies
