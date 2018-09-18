@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 * Initial draft.
 
-## [Unreleased] - 2018.09.18
+## [0.2.0] - 2018.09.18
 ### Added
 * Command line interface for directory report processing and single file entropy graph calculation.
 
