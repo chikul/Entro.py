@@ -15,7 +15,7 @@ class report:
         if not self.mute_console:
             print(message)
 
-    def process_directory(self, in_path, out_file_name):
+    def process_directory_report(self, in_path, out_file_name):
         """
         Creates an entropy report for a list of files in directory and saves it in a CSV spreadsheet.
         """
@@ -42,10 +42,23 @@ class report:
                     file_out.write("%s;%d;%f;%f;%f;%f\r" % (file_name, file_size, entropy, new_pi, pi_deviation, chi_squared))
 
             self.console_out("%30s %15d %15f %15f %15f %15f" % (file_name, file_size, entropy, new_pi, pi_deviation, chi_squared))
+
+
+    def process_directory_graphs(self, in_path, step):
+        """
+        Calculates entropy oscillations for every file in a passed directory and writes 
+        separate graph reports into CSV spreadsheets named <in_path>/<filename>.csv.
+        """
+        (_, _, file_list) = next(walk(in_path), (None, None, []))
+
+        for file_name in file_list:
+            self.console_out(f"Processing file: {file_name}")
+            self.write_entropy_graph(path.join(in_path, file_name), path.join(in_path, file_name) + ".csv", step)
+
     
     def write_entropy_graph(self, in_file_name, out_file_name, step, start=0, end=0):
         """
-        Calculates entropy oscillations for a file and write it to CSV spreadsheet.
+        Calculates entropy oscillations for a file and writes it to CSV spreadsheet.
         """
         byte_array = []
         with open(in_file_name, "rb") as f:

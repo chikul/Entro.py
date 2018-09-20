@@ -11,3 +11,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 * Command line interface for directory report processing and single file entropy graph calculation.
 
+## [Unreleased]
+### Added
+* Batch directory entropy graph reporting.

@@ -37,7 +37,14 @@ if __name__ == '__main__':
     reporting = report(args.quite)
 
     if args.is_directory:
-        reporting.process_directory(args.input_path, args.output_path)
-
-    if args.is_graph:
-        reporting.write_entropy_graph(args.input_path, args.output_path, args.step)
+        if not args.is_graph:
+            reporting.process_directory_report(args.input_path, args.output_path)
+            
+        else:
+            reporting.process_directory_graphs(args.input_path, args.step)
+    else:
+        if not args.is_graph:
+            # TODO: Single file general report here.
+            pass
+        else:
+            reporting.write_entropy_graph(args.input_path, args.output_path, args.step)
