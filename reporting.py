@@ -1,4 +1,4 @@
-from entrolib import *
+from entrolib import compute_entropy, compute_monte_carlo_pi, get_pi_deviation, compute_chi_squared, compute_entropy_graph
 from os import walk, path
 """
 reporting.py: A set of functions to create entropy reports.
@@ -11,9 +11,11 @@ class report:
     def __init__(self, quite = False):
         self.mute_console = quite
 
+
     def console_out(self, message):
         if not self.mute_console:
             print(message)
+
 
     def process_directory_report(self, in_path, out_file_name):
         """
