@@ -14,3 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 * Batch directory entropy graph reporting.
+* Single file report.
+
+### Fixed
+* Incorrect type for walk step CLI parameter.
