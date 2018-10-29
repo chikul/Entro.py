@@ -35,7 +35,8 @@ def compute_entropy_graph(data, step):
 
     while current_position < len(data):
         new_entropy = compute_entropy(data[current_position:current_position + step])
-        entropies.append(new_entropy)
+        new_chi = compute_chi_squared(data[current_position:current_position + step])
+        entropies.append([new_entropy, new_chi])
         current_position += step # Note: We skip the last chunk if it's less than step.
 
     return entropies

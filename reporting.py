@@ -92,14 +92,14 @@ class report:
             byte_array = byte_array[start:end]
 
         entropies = compute_entropy_graph(byte_array, step)
-        self.console_out("Entropy (per %d bytes)" % step)
+        self.console_out("%10s %15s" % ("Entropy", "Chi-Squared"))
 
         if out_file_name != "":
             with open(out_file_name, "w") as file_out:
-                file_out.write("Entropy (per %d bytes)\r" % step)
+                file_out.write("Entropy (per %d bytes);Chi-Squared (per %d bytes)\r" % (step, step))
                 for i in range(len(entropies)):
-                    self.console_out(entropies[i])
-                    file_out.write("%f\r" % entropies[i])
+                    self.console_out("%10f %15f" % (entropies[i][0], entropies[i][1]))
+                    file_out.write("%f;%f\r" % (entropies[i][0], entropies[i][1]))
         else:
             for i in range(len(entropies)):
-                self.console_out(entropies[i])
+                self.console_out("%10f %15f" % (entropies[i][0], entropies[i][1]))
