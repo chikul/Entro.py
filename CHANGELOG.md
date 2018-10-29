@@ -3,13 +3,11 @@ Changelog
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [0.1.0] - 2018.09.11
+## [0.4.0] - 2018.10.29
 ### Added
-* Initial draft.
+* `compute_entropy_graph()` now returns Chi-Squared graph as well as a second column. Reporting 
+extended accordingly.
 
-## [0.2.0] - 2018.09.18
-### Added
-* Command line interface for directory report processing and single file entropy graph calculation.
 
 ## [0.3.0] - 2018.09.24
 ### Added
@@ -18,3 +16,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 * Incorrect type for walk step CLI parameter.
+
+
+## [0.2.0] - 2018.09.18
+### Added
+* Command line interface for directory report processing and single file entropy graph calculation.
+
+
+## [0.1.0] - 2018.09.11
+### Added
+* Initial draft.
