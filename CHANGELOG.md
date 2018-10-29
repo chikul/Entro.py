@@ -3,7 +3,7 @@ Changelog
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [0.4.0] - 2018.10.29
 ### Added
 * `compute_entropy_graph()` now returns Chi-Squared graph as well as a second column. Reporting 
 extended accordingly.
