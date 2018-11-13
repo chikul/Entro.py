@@ -1,4 +1,5 @@
 import math
+from enum import Enum
 """
 entrolib.py: Function library for different data entropy tests.
 """
@@ -6,7 +7,7 @@ __author__    = "Pavel Chikul"
 __copyright__ = "Copyright 2018, REGLabs"
 
 
-def compute_entropy(data):
+def compute_shannon(data):
     """
     Calculate Shannon entropy value for a given byte array.
 
@@ -22,54 +23,30 @@ def compute_entropy(data):
     return entropy
 
 
-def compute_entropy_graph(data, step):
+def compute_entropy_graph(data, step, shannon=True, chi=True):
     """
-    Calculates an array of Shannon entropy values with a given step.
+    Calculates entropy graph values with different with different algorithms and step.
 
     Keyword arguments:
     data -- data bytes
     step -- step in bytes
+    shannon -- indicates whether Shannon entropy should be calculated
+    chi -- indicates whether Chi-Squared should be calculated
     """
-    entropies = []
+    shannons = []
+    chis = []
     current_position = 0
 
     while current_position < len(data):
-        new_entropy = compute_entropy(data[current_position:current_position + step])
-        new_chi = compute_chi_squared(data[current_position:current_position + step])
-        entropies.append([new_entropy, new_chi])
-        current_position += step # Note: We skip the last chunk if it's less than step.
+        if shannon:
+            shannons.append(compute_shannon(data[current_position:current_position + step]))
 
-    return entropies
-
-
-def detect_high_entropy_chunks(data, step):
-    """
-    Returns a list of high-entropy ranges in the given data block.
-
-    Keyword arguments:
-    data -- data bytes
-    step -- step in bytes
-    """
-    high_entropies = []
-    current_position = 0
-    started = -1
-
-    while current_position < len(data):
-        new_entropy = compute_entropy(data[current_position:current_position + step])
-
-        if started == -1 and new_entropy > 7.3:
-            # Found start of high-entropy block.
-            started = current_position
-
-        if started != -1 and new_entropy <= 7.3:
-            # Found end of high-entropy block.
-            if current_position - started > 4096: # TODO: Experimental value.
-                high_entropies.append((started, current_position))
-            started = -1
+        if chi:
+            chis.append(compute_chi_squared(data[current_position:current_position + step]))
 
         current_position += step # Note: We skip the last chunk if it's less than step.
 
-    return high_entropies
+    return (shannons, chis)
 
 
 def compute_monte_carlo_pi(data):
@@ -117,15 +94,3 @@ def compute_chi_squared(data):
         chi_squared += (o - expected) ** 2 / expected
 
     return chi_squared
-
-
-def write_xy2(data, out_file_name):
-    file = open(out_file_name, "w") 
-    
-    set_length = int(len(data) / 2)
-    r_square = 128 * 128
-    
-    for i in range(set_length):
-        if ((data[i*2] - 128) ** 2 + (data[i*2+1]-128) ** 2) <= r_square:
-            file.write(str(data[i*2]) + " " + str(data[i*2+1]) + "\r\n")
-    file.close()

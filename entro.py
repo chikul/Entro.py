@@ -29,3 +29,4 @@ if __name__ == '__main__':
             reporting.write_file_report(args.input_path, args.output_path)
         else:
             reporting.write_file_graph(args.input_path, args.output_path, args.step)
+	
