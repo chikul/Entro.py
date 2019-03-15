@@ -12,8 +12,8 @@ if __name__ == '__main__':
     parser.add_argument("-q", dest="quite", default=False, help="Surpress console messages.", action="store_true")
     parser.add_argument("-g", dest="is_graph", default=False, help="Create a graph of Shannon entropy oscillations.", action="store_true")
     parser.add_argument("-s", dest="step", default=512, help="File slice in bytes used to calculate Shannon entropy.", type=int)
-    #parser.add_argument("START", dest="step", default=0, help="File slice in bytes used to calculate Shannon entropy. If 0 the whole range is taken into calculation.")
-    #parser.add_argument("END", dest="step", default=0, help="File slice in bytes used to calculate Shannon entropy. If 0 the whole range is taken into calculation.")
+    parser.add_argument("-b", dest="start_block", default=0, help="Graph start offset in bytes.", type=int)
+    parser.add_argument("-e", dest="end_block", default=0, help="Graph end offset in bytes. If set to 0, the range up to the end of file is taken.")
     args = parser.parse_args()
 
     reporting = report(args.quite)

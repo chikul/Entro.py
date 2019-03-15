@@ -1,5 +1,4 @@
 import math
-from enum import Enum
 """
 entrolib.py: Function library for different data entropy tests.
 """
@@ -84,7 +83,10 @@ def compute_chi_squared(data):
     Keyword arguments:
     data -- data bytes
     """
-    expected = len(data) / 256
+    if len(data) == 0:
+        return 0
+
+    expected = float(len(data)) / 256.
     observed = [0] * 256
     for b in data:
         observed[b] += 1
