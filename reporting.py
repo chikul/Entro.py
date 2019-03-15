@@ -1,4 +1,4 @@
-from entrolib import compute_entropy, compute_monte_carlo_pi, get_pi_deviation, compute_chi_squared, compute_entropy_graph
+from entrolib import compute_shannon, compute_monte_carlo_pi, get_pi_deviation, compute_chi_squared, compute_entropy_graph
 from os import walk, path
 """
 reporting.py: A set of functions to create entropy reports.
@@ -34,7 +34,7 @@ class report:
                 byte_array = f.read()
 
             file_size = len(byte_array)
-            entropy = compute_entropy(byte_array)
+            entropy = compute_shannon(byte_array)
             new_pi = compute_monte_carlo_pi(byte_array)
             pi_deviation = get_pi_deviation(new_pi)
             chi_squared = compute_chi_squared(byte_array)
@@ -67,7 +67,7 @@ class report:
             byte_array = f.read()
 
         file_size = len(byte_array)
-        entropy = compute_entropy(byte_array)
+        entropy = compute_shannon(byte_array)
         new_pi = compute_monte_carlo_pi(byte_array)
         pi_deviation = get_pi_deviation(new_pi)
         chi_squared = compute_chi_squared(byte_array)
@@ -80,6 +80,7 @@ class report:
         self.console_out("%30s %15s %15s %15s %15s %15s" % ("File Name", "File Size (B)", "Entropy", "Pi", "Pi Deviation (%)", "Chi-Squared"))
         self.console_out("%30s %15d %15f %15f %15f %15f" % (in_file_name, file_size, entropy, new_pi, pi_deviation, chi_squared))
     
+    
     def write_file_graph(self, in_file_name, out_file_name, step, start=0, end=0):
         """
         Calculates entropy oscillations for a file and writes it to CSV spreadsheet.
@@ -91,15 +92,15 @@ class report:
         if start != 0 or end != 0:
             byte_array = byte_array[start:end]
 
-        entropies = compute_entropy_graph(byte_array, step)
+        shannons, chis = compute_entropy_graph(byte_array, step)
         self.console_out("%10s %15s" % ("Entropy", "Chi-Squared"))
 
         if out_file_name != "":
             with open(out_file_name, "w") as file_out:
                 file_out.write("Entropy (per %d bytes);Chi-Squared (per %d bytes)\r" % (step, step))
-                for i in range(len(entropies)):
-                    self.console_out("%10f %15f" % (entropies[i][0], entropies[i][1]))
-                    file_out.write("%f;%f\r" % (entropies[i][0], entropies[i][1]))
+                for i in range(len(shannons)):
+                    self.console_out("%10f %15f" % (shannons[i], chis[i]))
+                    file_out.write("%f;%f\r" % (shannons[i], chis[i]))
         else:
-            for i in range(len(entropies)):
-                self.console_out("%10f %15f" % (entropies[i][0], entropies[i][1]))
+            for i in range(len(shannons)):
+                self.console_out("%10f %15f" % (shannons[i], chis[i]))

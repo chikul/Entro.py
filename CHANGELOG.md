@@ -3,6 +3,17 @@ Changelog
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.5.0] - 2019.03.15
+### Added
+* Added `compute_arithmetic_mean()` function and extended `compute_entropy_graph()` with it.
+
+### Changed
+* Renamed `compute_entropy()` to `compute_shannon()`.
+* Extended `compute_entropy_graph()` with parameters to select what functions to use.
+
+### Removed
+* Cleaned up `entrolib` module of unused draft functions.
+
 ## [0.4.0] - 2018.10.29
 ### Added
 * `compute_entropy_graph()` now returns Chi-Squared graph as well as a second column. Reporting 
