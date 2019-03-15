@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+* Added `compute_arithmetic_mean()` function and extended `compute_entropy_graph()` with it.
+
 ### Changed
 * Renamed `compute_entropy()` to `compute_shannon()`.
 * Extended `compute_entropy_graph()` with parameters to select what functions to use.

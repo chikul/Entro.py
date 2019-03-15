@@ -22,32 +22,6 @@ def compute_shannon(data):
     return entropy
 
 
-def compute_entropy_graph(data, step, shannon=True, chi=True):
-    """
-    Calculates entropy graph values with different with different algorithms and step.
-
-    Keyword arguments:
-    data -- data bytes
-    step -- step in bytes
-    shannon -- indicates whether Shannon entropy should be calculated
-    chi -- indicates whether Chi-Squared should be calculated
-    """
-    shannons = []
-    chis = []
-    current_position = 0
-
-    while current_position < len(data):
-        if shannon:
-            shannons.append(compute_shannon(data[current_position:current_position + step]))
-
-        if chi:
-            chis.append(compute_chi_squared(data[current_position:current_position + step]))
-
-        current_position += step # Note: We skip the last chunk if it's less than step.
-
-    return (shannons, chis)
-
-
 def compute_monte_carlo_pi(data):
     """
     Calculate Monte Carlo Pi approximation for a given byte array.
@@ -96,3 +70,44 @@ def compute_chi_squared(data):
         chi_squared += (o - expected) ** 2 / expected
 
     return chi_squared
+
+
+def compute_arithmetic_mean(data):
+    """
+    Calculate arithmetic mean value for a given byte array. In a truly random data blob 
+    the result of arithmetic mean should lay around value of 127.5
+
+    Keyword arguments:
+    data -- data bytes
+    """
+    return sum(data) / float(len(data))
+
+
+def compute_entropy_graph(data, step, shannon=True, chi=True, mean=True):
+    """
+    Calculates entropy graph values with different with different algorithms and step.
+
+    Keyword arguments:
+    data -- data bytes
+    step -- step in bytes
+    shannon -- indicates whether Shannon entropy should be calculated
+    chi -- indicates whether Chi-Squared should be calculated
+    """
+    shannons = []
+    chis = []
+    means = []
+    current_position = 0
+
+    while current_position < len(data):
+        if shannon:
+            shannons.append(compute_shannon(data[current_position:current_position + step]))
+
+        if chi:
+            chis.append(compute_chi_squared(data[current_position:current_position + step]))
+
+        if mean:
+            means.append(compute_arithmetic_mean(data[current_position:current_position + step]))
+
+        current_position += step # Note: We skip the last chunk if it's less than step.
+
+    return (shannons, chis, means)
