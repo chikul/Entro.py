@@ -75,7 +75,7 @@ def compute_chi_squared(data):
 def compute_arithmetic_mean(data):
     """
     Calculate arithmetic mean value for a given byte array. In a truly random data blob 
-    the result of arithmetic mean should lay around value of 127.5
+    the result of arithmetic mean should lay around value of 127.5.
 
     Keyword arguments:
     data -- data bytes
@@ -85,13 +85,14 @@ def compute_arithmetic_mean(data):
 
 def compute_entropy_graph(data, step, shannon=True, chi=True, mean=True):
     """
-    Calculates entropy graph values with different with different algorithms and step.
+    Calculates entropy graph values with different algorithms and configurable step.
 
     Keyword arguments:
     data -- data bytes
     step -- step in bytes
     shannon -- indicates whether Shannon entropy should be calculated
     chi -- indicates whether Chi-Squared should be calculated
+    mean -- indicates whether Arithmetic Mean should be calculated
     """
     shannons = []
     chis = []
