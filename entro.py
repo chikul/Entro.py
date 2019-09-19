@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import sys
 import argparse
-from reporting import report
+from entro_py import report
 
 
 if __name__ == '__main__':

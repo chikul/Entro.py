@@ -1,4 +1,4 @@
-from entrolib import compute_shannon, compute_monte_carlo_pi, get_pi_deviation, compute_chi_squared, compute_entropy_graph
+from .entrolib import compute_shannon, compute_monte_carlo_pi, get_pi_deviation, compute_chi_squared, compute_entropy_graph
 from os import walk, path
 """
 reporting.py: A set of functions to create entropy reports.
@@ -92,7 +92,7 @@ class report:
         if start != 0 or end != 0:
             byte_array = byte_array[start:end]
 
-        shannons, chis = compute_entropy_graph(byte_array, step)
+        shannons, chis, _ = compute_entropy_graph(byte_array, step)
         self.console_out("%10s %15s" % ("Entropy", "Chi-Squared"))
 
         if out_file_name != "":
